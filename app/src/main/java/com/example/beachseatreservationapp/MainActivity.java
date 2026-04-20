@@ -19,6 +19,7 @@ import com.example.beachseatreservationapp.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            Toast.makeText(this, "You are already on this page", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.beachlist) {

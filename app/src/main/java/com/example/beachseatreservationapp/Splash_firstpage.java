@@ -16,7 +16,7 @@ public class Splash_firstpage extends AppCompatActivity {
             Intent intent = new Intent(Splash_firstpage.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }, 5000); // 5 seconds
+        }, 2000); // 5 seconds
     }
 
     }

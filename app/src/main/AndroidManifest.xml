@@ -12,20 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeachSeatReservationApp">
         <activity
+            android:name=".MainActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".BeachActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Reservation"
+            android:exported="false"/>
+        <activity
             android:name=".Splash_firstpage"
             android:exported="true"
             android:theme="@style/Theme.BeachSeatReservationApp">
-            <activity
-                android:name=".MainActivity"
-                android:exported="false"/>
-
-            <activity
-                android:name=".BeachActivity"
-                android:exported="false"/>
-            <activity
-                android:name=".Reservation"
-                android:exported="false"/>
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
