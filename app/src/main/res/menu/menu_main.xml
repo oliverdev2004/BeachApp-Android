@@ -6,19 +6,23 @@
     <item
         android:id="@+id/home"
         android:orderInCategory="100"
+        android:icon="@drawable/house"
         android:title="@string/homemenu"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:iconTint="#FFFFFF"/>
     <item
         android:id="@+id/beachlist"
-
         android:orderInCategory="100"
+        android:icon="@drawable/placeholder"
         android:title="@string/listbeach"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:iconTint="#FFFFFF"/>
     <item
         android:id="@+id/reservation"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/reser"
-        app:showAsAction="always" />
+        android:icon="@drawable/calendar"
+        app:showAsAction="always"
+        app:iconTint="#FFFFFF"/>
 
 </menu>

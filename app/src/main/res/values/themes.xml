@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.BeachSeatReservationApp" parent="Base.Theme.BeachSeatReservationApp" />
+
 </resources>
