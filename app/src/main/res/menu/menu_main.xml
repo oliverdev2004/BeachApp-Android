@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.beachseatreservationapp.MainActivity">
+
+    <item
+        android:id="@+id/home"
+        android:orderInCategory="100"
+        android:title="@string/homemenu"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/beachlist"
+
+        android:orderInCategory="100"
+        android:title="@string/listbeach"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/reservation"
+        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/reser"
+        app:showAsAction="always" />
+
+</menu>
