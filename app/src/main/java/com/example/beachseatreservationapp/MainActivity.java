@@ -49,13 +49,19 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String[] titles={"Maldives", "Bali, Indonesia", "Santorini, Greece", "Phuket, Thailand "};
-        int[] images={R.drawable.maldive, R.drawable.bali,R.drawable.santorini,R.drawable.thailand };
+        String[] titles={"Maldives", "Bali, Indonesia", "Santorini, Greece", "Phuket, Thailand ","Cancun, Mexico","Mykonos, Greece ","Boracay, Philippines","Côte d'Azur, France","Maui, Hawaii ","Dubai, UAE "};
+        int[] images={R.drawable.maldive, R.drawable.bali,R.drawable.santorini,R.drawable.thailand,R.drawable.mexico,R.drawable.mykonos,R.drawable.philipine,R.drawable.cote,R.drawable.huwai,R.drawable.dubai };
         String[] descriptions = {
                 " Overwater bungalows, crystal clear water, Indian Ocean",
                 "Kuta Beach, Seminyak, tropical paradise",
                 "Perissa Black Sand Beach, stunning views",
-                "Patong Beach, turquoise water, vibrant nightlife"
+                "Patong Beach, turquoise water, vibrant nightlife",
+                "Hotel Zone, Caribbean white sand beaches",
+                "Paradise Beach, crystal blue Aegean Sea",
+                "White Beach, powder white sand, clear water",
+                "French Riviera, glamorous Mediterranean beaches",
+                "Kaanapali Beach, volcanic black sand, surfing",
+                "Jumeirah Beach, luxury resorts, skyline views"
         };
         //create a list of items from the array
         List<item_java> itemList=new ArrayList<>();
