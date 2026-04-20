@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sunspot</string>
     <string name="action_settings">Settings</string>
+    <string name="headerpage1">Best Destinations Around The World</string>
     <string name="homemenu">HOME</string>
     <string name="listbeach">BEACHES</string>
     <string name="reser">RESERVATION</string>

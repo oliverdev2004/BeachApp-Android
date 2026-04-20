@@ -5,26 +5,26 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.beachseatreservationapp.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
+    RecyclerView recyclerView;
+    com.example.week8app3sp25section12rv.MyRecyclerViewAdapter myadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        String[] titles={"Maldives", "Bali, Indonesia", "Santorini, Greece", "Phuket, Thailand "};
+        int[] images={R.drawable.maldive, R.drawable.bali,R.drawable.santorini,R.drawable.thailand };
+        String[] descriptions = {
+                " Overwater bungalows, crystal clear water, Indian Ocean",
+                "Kuta Beach, Seminyak, tropical paradise",
+                "Perissa Black Sand Beach, stunning views",
+                "Patong Beach, turquoise water, vibrant nightlife"
+        };
+        //create a list of items from the array
+        List<item_java> itemList=new ArrayList<>();
+        for(int i=0; i<titles.length; i++)
+        {
+            itemList.add(new item_java(titles[i], images[i], descriptions[i]));
+        }
+
+        myadapter=new com.example.week8app3sp25section12rv.MyRecyclerViewAdapter(itemList);
+        recyclerView.setAdapter(myadapter);
     }
 
     @Override
