@@ -28,6 +28,7 @@ public class Reservation extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("☀\uFE0F");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
@@ -41,9 +42,8 @@ public class Reservation extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                //floating bar intent
+                Toast.makeText(Reservation.this, "Your Reservations \uD83D\uDCCB", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -30,6 +30,7 @@ public class BeachActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("☀\uFE0F");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
@@ -43,9 +44,9 @@ public class BeachActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                //floating bar intent
+                Intent i = new Intent(BeachActivity.this, Reservation.class);
+                startActivity(i);
             }
         });
 
