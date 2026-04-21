@@ -1,28 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/tvBestDestination"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/headerpage1"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#73A5CA"
-        android:padding="16dp"/>
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        android:clipToPadding="false"/>
+        <TextView
+            android:id="@+id/tvBestDestination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/headerpage1"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#73A5CA"
+            android:padding="16dp"/>
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:padding="8dp"
+            android:clipToPadding="false"/>
+
+        <!-- Sun Info Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="☀️ Sun Information"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#73A5CA"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The sun is the star at the center of our solar system. It provides the light and warmth that makes life on Earth possible. Sun exposure is essential for vitamin D production but must be managed carefully to avoid skin damage."
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:lineSpacingExtra="6dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Precautions Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚠️ Beach Precautions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#73A5CA"
+            android:paddingStart="16dp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🧴 Always apply sunscreen before going to the beach\n\n🕶️ Wear sunglasses to protect your eyes\n\n🧢 Use a hat or umbrella to avoid direct sun exposure\n\n💧 Stay hydrated and drink plenty of water\n\n🚫 Avoid direct sun exposure between 12PM and 3PM\n\n🌊 Always check sea conditions before swimming"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:lineSpacingExtra="8dp"
+            android:paddingBottom="16dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏖️ Beach Etiquette"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#73A5CA"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚯 Never leave trash on the beach\n\n🔇 Keep noise levels low to respect others\n\n🐚 Do not take shells or rocks from the beach\n\n🐠 Do not disturb marine life\n\n📵 Respect other people's space and privacy"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:lineSpacingExtra="8dp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🌴 Enjoy your beach experience responsibly"
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                //floating bar intent
+                Intent i = new Intent(MainActivity.this, Reservation.class);
+                startActivity(i);
             }
         });
+
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String[] titles={"Maldives", "Bali, Indonesia", "Santorini, Greece", "Phuket, Thailand ","Cancun, Mexico","Mykonos, Greece ","Boracay, Philippines","Côte d'Azur, France","Maui, Hawaii ","Dubai, UAE "};
