@@ -1,75 +1,80 @@
 package com.example.beachseatreservationapp;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.beachseatreservationapp.databinding.ActivityBeachesBinding;
-import com.google.android.material.snackbar.Snackbar;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeachActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityBeachesBinding binding;
 
+    RecyclerView recyclerView;
+    BeachAdapter beachAdapter;
+    List<Beach> beachList = new ArrayList<>();
 
+    String URL = "http://192.168.1.109/getAllbeach.php";  // ← your IP
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //menu go over the head page
-        getWindow().setStatusBarColor(Color.parseColor("#73A5CA"));
-        binding = ActivityBeachesBinding .inflate(getLayoutInflater());
+        binding = ActivityBeachesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("☀\uFE0F");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        beachAdapter = new BeachAdapter(beachList, this);
+        recyclerView.setAdapter(beachAdapter);
+        loadBeaches();
+    }
 
+    private void loadBeaches() {
+        StringRequest request = new StringRequest(Request.Method.GET, URL,
+                response -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+                            beachList.add(new Beach(
+                                    obj.getInt("id"),
+                                    obj.getString("name"),
+                                    obj.getString("location"),
+                                    obj.getString("description")
+                            ));
+                        }
+                        beachAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                },
+                error -> Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
+        );
 
-
-
-        /*
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);*/
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //floating bar intent
-                Intent i = new Intent(BeachActivity.this, Reservation.class);
-                startActivity(i);
-            }
-        });
-
-
+        Volley.newRequestQueue(this).add(request);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.home) {
-            Intent i = new Intent(this, MainActivity.class);
+            android.content.Intent i = new android.content.Intent(this, MainActivity.class);
             startActivity(i);
             return true;
         }
@@ -78,19 +83,11 @@ public class BeachActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.reservation) {
-            Intent i = new Intent(this, Reservation.class);
+            android.content.Intent i = new android.content.Intent(this, Reservation.class);
             startActivity(i);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
-
-
-    /*
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }*/
 }

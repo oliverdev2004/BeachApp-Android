@@ -1,4 +1,4 @@
-package com.example.week8app3sp25section12rv;
+package com.example.beachseatreservationapp;
 
 import android.content.ClipData;
 import android.view.LayoutInflater;

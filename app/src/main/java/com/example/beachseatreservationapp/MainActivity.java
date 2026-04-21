@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     RecyclerView recyclerView;
-    com.example.week8app3sp25section12rv.MyRecyclerViewAdapter myadapter;
+    MyRecyclerViewAdapter myadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             itemList.add(new item_java(titles[i], images[i], descriptions[i]));
         }
 
-        myadapter=new com.example.week8app3sp25section12rv.MyRecyclerViewAdapter(itemList);
+        myadapter=new MyRecyclerViewAdapter(itemList);
         recyclerView.setAdapter(myadapter);
     }
 
