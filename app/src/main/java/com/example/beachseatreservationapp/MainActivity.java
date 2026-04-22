@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
         String[] titles={"Maldives", "Bali, Indonesia", "Santorini, Greece", "Phuket, Thailand ","Cancun, Mexico","Mykonos, Greece ","Boracay, Philippines","Côte d'Azur, France","Maui, Hawaii ","Dubai, UAE "};
         int[] images={R.drawable.maldive, R.drawable.bali,R.drawable.santorini,R.drawable.thailand,R.drawable.mexico,R.drawable.mykonos,R.drawable.philipine,R.drawable.cote,R.drawable.huwai,R.drawable.dubai };
         String[] descriptions = {

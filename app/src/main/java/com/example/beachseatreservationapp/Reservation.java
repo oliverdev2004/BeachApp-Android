@@ -7,18 +7,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.beachseatreservationapp.databinding.ActivityReservationBinding;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reservation extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityReservationBinding binding;
-
+    RecyclerView recyclerView;
+    ReservationAdapter reservationAdapter;
+    List<ReservationModel> reservationList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,45 +34,72 @@ public class Reservation extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor("#73A5CA"));
         binding = ActivityReservationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("☀\uFE0F");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        recyclerView = findViewById(R.id.reservationRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
-        /*
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);*/
+        fetchReservations();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //floating bar intent
                 Toast.makeText(Reservation.this, "Your Reservations \uD83D\uDCCB", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    private void fetchReservations() {
+        String url = "http://192.168.1.103/get_reservation.php";
 
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            reservationList.clear();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject obj = jsonArray.getJSONObject(i);
+                                ReservationModel reservation = new ReservationModel(
+                                        obj.getInt("id"),
+                                        obj.getInt("beach_id"),
+                                        obj.getString("beach_name"),
+                                        obj.getString("user_name"),
+                                        obj.getString("reservation_date"),
+                                        obj.getInt("seats")
+                                );
+                                reservationList.add(reservation);
+                            }
+                            reservationAdapter = new ReservationAdapter(Reservation.this, reservationList);
+                            recyclerView.setAdapter(reservationAdapter);
+                        } catch (Exception e) {
+                            Toast.makeText(Reservation.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String message = error.getMessage() != null ? error.getMessage() : "Connection failed";
+                        Toast.makeText(Reservation.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        Volley.newRequestQueue(Reservation.this).add(stringRequest);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.home) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
@@ -79,16 +114,6 @@ public class Reservation extends AppCompatActivity {
             Toast.makeText(this, "You are already on this page", Toast.LENGTH_SHORT).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-    /*
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }*/
 }
