@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,17 +27,22 @@ public class BeachAdapter extends RecyclerView.Adapter<BeachAdapter.BeachViewHol
     private List<Beach> beachList;
     private Context context;
     private EditText etUserName, etDate, etSeats;
+    private Spinner spinnerSeatType;
+    private OnReservationListener listener;
 
 
 
-
-    public BeachAdapter(Context context, List<Beach> beachList, EditText etUserName, EditText etDate,EditText etSeats
-    ) {
+    public interface OnReservationListener {
+        void onReservationSuccess();
+    }
+    public BeachAdapter(Context context, List<Beach> beachList, EditText etUserName, EditText etDate, EditText etSeats, Spinner spinnerSeatType, OnReservationListener listener) {
         this.context = context;
         this.beachList = beachList;
         this.etUserName = etUserName;
         this.etDate = etDate;
-        this.etSeats= etSeats;
+        this.etSeats = etSeats;
+        this.spinnerSeatType = spinnerSeatType;
+        this.listener = listener;
     }
 
     @NonNull
@@ -59,18 +65,30 @@ public class BeachAdapter extends RecyclerView.Adapter<BeachAdapter.BeachViewHol
                 String userName = etUserName.getText().toString().trim();
                 String date = etDate.getText().toString().trim();
                 String seats = etSeats.getText().toString().trim();
+                String seatType = spinnerSeatType.getSelectedItem().toString();
 
+/*Beach beach = new Beach(
+    obj.getInt("id"),
+    obj.getString("name"),
+    obj.getString("location"),
+    obj.getString("description"),
+    obj.getInt("seats") // ← this comes from database
+);*/
 
-                if (userName.isEmpty() || date.isEmpty() || seats.isEmpty()) { // ADD seats check
+                if (userName.isEmpty() || date.isEmpty() || seats.isEmpty()) {
                     Toast.makeText(context, "Please fill all fields first!", Toast.LENGTH_SHORT).show();
+                } else if (beach.getSeats() == 0) {
+                    Toast.makeText(context, "This beach is fully booked! 🚫", Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(seats) > beach.getSeats()) {
+                    Toast.makeText(context, "Only " + beach.getSeats() + " seats available!", Toast.LENGTH_SHORT).show();
                 } else {
-                    addReservation(beach, userName, date, seats); // ADD seats
+                    addReservation(beach, userName, date, seats, seatType);
                 }
             }
         });
     }
-    private void addReservation(Beach beach, String userName, String date, String seats) { // ADD seats parameter
-        String url = "http://192.168.1.103/add_reservation.php";
+    private void addReservation(Beach beach, String userName, String date, String seats, String seatType){
+        String url = "http://192.168.1.121/add_reservation.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -78,6 +96,7 @@ public class BeachAdapter extends RecyclerView.Adapter<BeachAdapter.BeachViewHol
                     public void onResponse(String response) {
                         if (!response.trim().equals("-1")) {
                             Toast.makeText(context, "Reservation successful! 🎉", Toast.LENGTH_SHORT).show();
+                            listener.onReservationSuccess(); // ADD THIS
                         } else {
                             Toast.makeText(context, "Reservation failed!", Toast.LENGTH_SHORT).show();
                         }
@@ -97,7 +116,8 @@ public class BeachAdapter extends RecyclerView.Adapter<BeachAdapter.BeachViewHol
                 params.put("beach_name", beach.getName());
                 params.put("user_name", userName);
                 params.put("reservation_date", date);
-                params.put("seats", seats); // now works because seats is a parameter
+                params.put("seats", seats);
+                params.put("seat_type", seatType);
                 return params;
             }
         };

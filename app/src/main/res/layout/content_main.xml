@@ -11,16 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Header -->
         <TextView
             android:id="@+id/tvBestDestination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/headerpage1"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#73A5CA"
             android:padding="16dp"/>
 
+        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -30,83 +32,137 @@
             android:padding="8dp"
             android:clipToPadding="false"/>
 
-        <TextView
+        <!-- Sun Info Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="☀️ Sun Information"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#73A5CA"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="☀️ Sun Information"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#73A5CA"
+                    android:paddingBottom="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="The sun is the star at the center of our solar system. It provides the light and warmth that makes life on Earth possible. Sun exposure is essential for vitamin D production but must be managed carefully to avoid skin damage."
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="6dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Precautions Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The sun is the star at the center of our solar system. It provides the light and warmth that makes life on Earth possible. Sun exposure is essential for vitamin D production but must be managed carefully to avoid skin damage."
-            android:textSize="14sp"
-            android:textColor="#333333"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:lineSpacingExtra="6dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="⚠️ Beach Precautions"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#73A5CA"
-            android:paddingStart="16dp"
-            android:paddingBottom="8dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ Beach Precautions"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#73A5CA"
+                    android:paddingBottom="8dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🧴 Always apply sunscreen before going to the beach\n\n🕶️ Wear sunglasses to protect your eyes\n\n🧢 Use a hat or umbrella to avoid direct sun exposure\n\n💧 Stay hydrated and drink plenty of water\n\n🚫 Avoid direct sun exposure between 12PM and 3PM\n\n🌊 Always check sea conditions before swimming"
-            android:textSize="14sp"
-            android:textColor="#333333"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:lineSpacingExtra="8dp"
-            android:paddingBottom="16dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="8dp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"
-            android:layout_marginTop="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧴 Always apply sunscreen before going to the beach\n\n🕶️ Wear sunglasses to protect your eyes\n\n🧢 Use a hat or umbrella to avoid direct sun exposure\n\n💧 Stay hydrated and drink plenty of water\n\n🚫 Avoid direct sun exposure between 12PM and 3PM\n\n🌊 Always check sea conditions before swimming"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="8dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🏖️ Beach Etiquette"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#73A5CA"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"/>
+            </LinearLayout>
 
-        <TextView
+        </androidx.cardview.widget.CardView>
+
+        <!-- Etiquette Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🚯 Never leave trash on the beach\n\n🔇 Keep noise levels low to respect others\n\n🐚 Do not take shells or rocks from the beach\n\n🐠 Do not disturb marine life\n\n📵 Respect other people's space and privacy"
-            android:textSize="14sp"
-            android:textColor="#333333"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:lineSpacingExtra="8dp"
-            android:paddingBottom="16dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🏖️ Beach Etiquette"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#73A5CA"
+                    android:paddingBottom="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🚯 Never leave trash on the beach\n\n🔇 Keep noise levels low to respect others\n\n🐚 Do not take shells or rocks from the beach\n\n🐠 Do not disturb marine life\n\n📵 Respect other people's space and privacy"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Footer -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

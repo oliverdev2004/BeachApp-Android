@@ -52,7 +52,7 @@ public class Reservation extends AppCompatActivity {
     }
 
     private void fetchReservations() {
-        String url = "http://192.168.1.103/get_reservation.php";
+        String url = "http://192.168.1.121/get_reservation.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -69,7 +69,9 @@ public class Reservation extends AppCompatActivity {
                                         obj.getString("beach_name"),
                                         obj.getString("user_name"),
                                         obj.getString("reservation_date"),
-                                        obj.getInt("seats")
+                                        obj.getInt("seats"),
+                                        obj.getString("seat_type")
+
                                 );
                                 reservationList.add(reservation);
                             }

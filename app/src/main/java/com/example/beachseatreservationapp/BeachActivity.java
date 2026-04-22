@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,15 +23,42 @@ import java.util.List;
 public class BeachActivity extends AppCompatActivity {
 
     private ActivityBeachesBinding binding;
-
     RecyclerView recyclerView;
     BeachAdapter beachAdapter;
     List<Beach> beachList = new ArrayList<>();
-    EditText etUserName,etDate,etSeats;
+    EditText etUserName, etDate, etSeats;
+    Spinner spinnerSeatType;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityBeachesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("☀\uFE0F");
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        etUserName = findViewById(R.id.etUserName);
+        etDate = findViewById(R.id.etDate);
+        etSeats = findViewById(R.id.etSeats);
+        spinnerSeatType = findViewById(R.id.spinnerSeatType);
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =new Intent(BeachActivity.this,Reservation.class);
+                startActivity(i);
+            }
+        });
+
+        fetchBeaches();
+    }
+
     private void fetchBeaches() {
         binding.progressBar.setVisibility(View.VISIBLE);
+        String url = "http://192.168.1.121/getAllbeach.php";
 
-        String url = "http://192.168.1.103/getAllbeach.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -49,7 +77,13 @@ public class BeachActivity extends AppCompatActivity {
                                 );
                                 beachList.add(beach);
                             }
-                            beachAdapter = new BeachAdapter(BeachActivity.this, beachList, etUserName, etDate,etSeats);
+                            beachAdapter = new BeachAdapter(BeachActivity.this, beachList, etUserName, etDate, etSeats, spinnerSeatType,
+                                    new BeachAdapter.OnReservationListener() {
+                                        @Override
+                                        public void onReservationSuccess() {
+                                            fetchBeaches();
+                                        }
+                                    });
                             recyclerView.setAdapter(beachAdapter);
                             binding.progressBar.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
@@ -70,48 +104,15 @@ public class BeachActivity extends AppCompatActivity {
         Volley.newRequestQueue(BeachActivity.this).add(stringRequest);
     }
 
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityBeachesBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("☀\uFE0F");
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        etUserName = findViewById(R.id.etUserName);
-        etDate = findViewById(R.id.etDate);
-        etSeats=findViewById(R.id.etSeats);
-
-
-        fetchBeaches();
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //floating bar intent
-                Intent i = new Intent(BeachActivity.this, Reservation.class);
-                startActivity(i);
-            }
-        });
-
-    }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.home) {
             android.content.Intent i = new android.content.Intent(this, MainActivity.class);
             startActivity(i);
@@ -126,7 +127,6 @@ public class BeachActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

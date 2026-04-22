@@ -18,6 +18,11 @@ public class Splash_firstpage extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
 
+        // HIDE the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         setContentView(R.layout.splash);
 
         new Handler().postDelayed(() -> {

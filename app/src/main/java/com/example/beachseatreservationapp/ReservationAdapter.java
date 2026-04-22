@@ -39,6 +39,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         holder.tvUserName.setText("Reserved by: " + reservation.getUserName());
         holder.tvDate.setText("Date: " + reservation.getReservationDate());
         holder.tvSeats.setText("Seats: " + reservation.getSeats());
+        holder.seat_type.setText("Seat Type: " + reservation.getSeat_type());
         final int currentPosition = position; // ADD THIS
 
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +51,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     }
 
     private void cancelReservation(int id, int position) {
-        String url = "http://192.168.1.103/delete_reservation.php?id=" + id;
+        String url = "http://192.168.1.121/delete_reservation.php?id=" + id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -81,7 +82,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     public int getItemCount() { return reservationList.size(); }
 
     public static class ReservationViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBeachName, tvUserName, tvDate, tvSeats;
+        TextView tvBeachName, tvUserName, tvDate, tvSeats,seat_type;
         Button btnCancel;
 
         public ReservationViewHolder(View itemView) {
@@ -90,6 +91,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvSeats = itemView.findViewById(R.id.tvSeats);
+            seat_type=itemView.findViewById(R.id.seat_type);
             btnCancel = itemView.findViewById(R.id.btnCancel);
         }
     }

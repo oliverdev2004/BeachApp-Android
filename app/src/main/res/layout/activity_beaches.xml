@@ -10,14 +10,19 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#73A5CA"
         android:fitsSystemWindows="true"
-        android:background="#73A5CA">
+        app:elevation="8dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#73A5CA" />
+            android:background="#73A5CA"
+            app:titleTextColor="#FFFFFF"
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:elevation="8dp"/>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
